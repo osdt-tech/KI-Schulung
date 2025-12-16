@@ -162,6 +162,57 @@
       letter-spacing: 0.2px;
     }
 
+    .panel.link-panel {
+      background: radial-gradient(circle at 20% 20%, rgba(247, 181, 0, 0.18), rgba(255, 255, 255, 0.04)),
+                  rgba(8, 14, 26, 0.75);
+      border: 1px solid rgba(247, 181, 0, 0.55);
+      box-shadow: 0 16px 46px rgba(247, 181, 0, 0.15);
+    }
+
+    .link-note {
+      margin: 0 0 10px;
+      color: var(--text);
+      font-weight: 600;
+      letter-spacing: 0.1px;
+    }
+
+    .link-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: grid;
+      gap: 10px;
+    }
+
+    .link-list li {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 12px;
+      border-radius: 10px;
+      background: rgba(0, 0, 0, 0.15);
+      border: 1px solid rgba(247, 181, 0, 0.25);
+    }
+
+    .link-dot {
+      width: 9px;
+      height: 9px;
+      border-radius: 50%;
+      background: linear-gradient(140deg, var(--accent), var(--accent-2));
+      box-shadow: 0 0 0 3px rgba(247, 181, 0, 0.2);
+      flex-shrink: 0;
+    }
+
+    .link-list a {
+      color: var(--text);
+      font-weight: 700;
+      text-decoration: none;
+    }
+
+    .link-list a:hover {
+      text-decoration: underline;
+    }
+
     .panel p {
       margin: 0;
       color: var(--muted);
@@ -574,6 +625,24 @@
             <h3>🔍 Dein KI-Assistent hier</h3>
             <p><strong>Typ:</strong> Claude – spezialisiert auf Reasoning und nuancierte Aufgaben. <strong>Stärken:</strong> Logisches Denken, kreative Lösungen, längere Analysen.</p>
           </div>
+          <div class="panel link-panel">
+            <h3>📘 Cookbook: KI-Modelle</h3>
+            <p class="link-note">Nützliche Rezepte, Patterns und Beispiele</p>
+            <ul class="link-list">
+              <li>
+                <span class="link-dot" aria-hidden="true"></span>
+                <a href="https://cookbook.openai.com/" target="_blank" rel="noopener">OpenAI Cookbook</a>
+              </li>
+              <li>
+                <span class="link-dot" aria-hidden="true"></span>
+                <a href="https://github.com/openai/openai-cookbook" target="_blank" rel="noopener">OpenAI Cookbook (GitHub)</a>
+              </li>
+              <li>
+                <span class="link-dot" aria-hidden="true"></span>
+                <a href="https://huggingface.co/tasks" target="_blank" rel="noopener">Hugging Face Tasks & Beispiele</a>
+              </li>
+            </ul>
+          </div>
         </div>
       </div>
 
@@ -632,14 +701,6 @@
             <strong>Warum gut:</strong> Ideen schneller festhalten, Hände frei, barrierearm, weniger Tippfehler bei langen Texten.<br>
             <strong>Tipps:</strong> Headset nutzen, deutlich sprechen, Satzzeichen wie „Punkt“, „Komma“ mitsprechen.</p>
             <button class="cta secondary small" id="winhTestBtn">Windows + H jetzt testen</button>
-          </div>
-          <div class="panel">
-            <h3>📘 Cookbook: KI-Modelle</h3>
-            <p>Nützliche Rezepte, Patterns und Beispiele:<br>
-              • <a href="https://cookbook.openai.com/" target="_blank" rel="noopener">OpenAI Cookbook</a><br>
-              • <a href="https://github.com/openai/openai-cookbook" target="_blank" rel="noopener">OpenAI Cookbook (GitHub)</a><br>
-              • <a href="https://huggingface.co/tasks" target="_blank" rel="noopener">Hugging Face Tasks & Beispiele</a>
-            </p>
           </div>
         </div>
         <div class="info-box">
