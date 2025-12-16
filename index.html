@@ -811,6 +811,7 @@
     // Tab Navigation with ARIA
     const navTabs = document.querySelectorAll('.nav-tab');
     const contentSections = document.querySelectorAll('.content-section');
+    const startButton = document.getElementById('startButton');
 
     function activateTab(tabName) {
       navTabs.forEach(t => {
@@ -824,11 +825,21 @@
         section.classList.toggle('active', isActive);
         section.hidden = !isActive;
       });
+      setStartButtonVisibility(tabName);
     }
 
     navTabs.forEach(tab => {
       tab.addEventListener('click', () => activateTab(tab.dataset.tab));
     });
+
+    function setStartButtonVisibility(tabName) {
+      if (!startButton) return;
+      const show = tabName === 'overview';
+      startButton.hidden = !show;
+      startButton.style.display = show ? '' : 'none';
+    }
+
+    setStartButtonVisibility('overview');
 
     // Advance to next tab with wrap-around
     function wechsleZumNaechstenTab() {
