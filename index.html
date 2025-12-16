@@ -829,6 +829,16 @@
       tab.addEventListener('click', () => activateTab(tab.dataset.tab));
     });
 
+    // Advance to next tab with wrap-around
+    function wechsleZumNaechstenTab() {
+      const tabs = Array.from(navTabs);
+      const currentIndex = tabs.findIndex(t => t.classList.contains('active'));
+      const nextIndex = (currentIndex + 1) % tabs.length;
+      const nextTab = tabs[nextIndex];
+      activateTab(nextTab.dataset.tab);
+      nextTab.focus();
+    }
+
     // Keyboard navigation among tabs
     const tablist = document.querySelector('.nav-tabs[role="tablist"]');
     tablist?.addEventListener('keydown', (e) => {
@@ -933,8 +943,7 @@
       if (!isRunning) {
         startAnimation();
       }
-      activateTab('intro'); // Switch to Einführung when starting
-      document.getElementById('intro')?.focus();
+      wechsleZumNaechstenTab();
     });
 
     const toggleButton = document.getElementById('toggleButton');
