@@ -269,29 +269,6 @@
       border-radius: 10px;
     }
 
-    .cta-row.docked {
-      position: fixed;
-      left: 50%;
-      bottom: 18px;
-      transform: translateX(-50%);
-      padding: 10px 14px;
-      background: rgba(10, 13, 20, 0.78);
-      border: 1px solid rgba(255, 255, 255, 0.14);
-      border-radius: 16px;
-      box-shadow: 0 14px 46px rgba(0, 0, 0, 0.35);
-      z-index: 5;
-    }
-
-    @media (max-width: 700px) {
-      .cta-row.docked {
-        position: static;
-        transform: none;
-        padding: 0;
-        background: none;
-        border: none;
-        box-shadow: none;
-      }
-    }
 
     .meta {
       display: flex;
@@ -811,7 +788,7 @@
         </div>
       </div>
 
-      <div class="cta-row docked">
+      <div class="cta-row">
         <button class="cta primary" id="startButton">Los geht’s ✨</button>
         <button class="cta secondary" id="toggleButton">Glitzer stoppen</button>
       </div>
