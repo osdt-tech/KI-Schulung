@@ -1,0 +1,854 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>KI-Schulung – Willkommen</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700&family=Playfair+Display:ital@0;1&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-1: #0a1526;
+      --bg-2: #122b49;
+      --accent: #f7b500;
+      --accent-2: #ff6f61;
+      --glass: rgba(255, 255, 255, 0.08);
+      --text: #f6f8fb;
+      --muted: #c7cfda;
+      --shadow: 0 20px 60px rgba(0, 0, 0, 0.35);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      min-height: auto;
+      font-family: 'Manrope', system-ui, -apple-system, sans-serif;
+      color: var(--text);
+      background: radial-gradient(circle at 20% 20%, rgba(247, 181, 0, 0.14), transparent 25%),
+                  radial-gradient(circle at 80% 10%, rgba(255, 111, 97, 0.12), transparent 25%),
+                  linear-gradient(135deg, var(--bg-1), var(--bg-2));
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: clamp(18px, 4vw, 36px);
+      overflow-y: auto;
+      overflow-x: hidden;
+      scrollbar-width: none; /* Firefox */
+    }
+
+    body::-webkit-scrollbar {
+      display: none; /* Chrome, Safari, Edge */
+    }
+
+    .orb {
+      position: absolute;
+      filter: blur(80px);
+      opacity: 0.7;
+      z-index: 0;
+      animation: float 16s ease-in-out infinite;
+    }
+
+    .orb.one {
+      width: 320px;
+      height: 320px;
+      background: #f7b500;
+      top: 8%;
+      left: 12%;
+    }
+
+    .orb.two {
+      width: 280px;
+      height: 280px;
+      background: #ff6f61;
+      bottom: 6%;
+      right: 10%;
+      animation-delay: 4s;
+    }
+
+    @keyframes float {
+      0% { transform: translateY(0) scale(1); }
+      50% { transform: translateY(-14px) scale(1.05); }
+      100% { transform: translateY(0) scale(1); }
+    }
+
+    .shell {
+      position: relative;
+      width: min(960px, 100%);
+      margin: 0 auto;
+      z-index: 1;
+    }
+
+    .card {
+      background: var(--glass);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 24px;
+      box-shadow: var(--shadow);
+      padding: clamp(20px, 4vw, 32px);
+      backdrop-filter: blur(16px);
+      position: relative;
+      overflow: hidden;
+      margin: 0 auto;
+      z-index: 2;
+      max-width: 960px;
+    }
+
+    .topline {
+      display: inline-flex;
+      gap: 8px;
+      align-items: center;
+      padding: 8px 12px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.08);
+      font-weight: 600;
+      letter-spacing: 0.6px;
+    }
+
+    h1 {
+      font-family: 'Playfair Display', 'Manrope', serif;
+      font-size: clamp(32px, 5vw, 48px);
+      margin: 12px 0 4px;
+      letter-spacing: 0.4px;
+    }
+
+    .subhead {
+      color: var(--muted);
+      font-size: clamp(16px, 2.2vw, 18px);
+      max-width: 760px;
+      line-height: 1.5;
+      margin-bottom: 24px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .pill-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 24px;
+      justify-content: center;
+    }
+
+    .pill {
+      padding: 10px 14px;
+      border-radius: 14px;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      background: rgba(255, 255, 255, 0.05);
+      font-weight: 600;
+      font-size: 14px;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+      gap: 18px;
+      margin: 16px 0 8px;
+    }
+
+    .panel {
+      background: rgba(255, 255, 255, 0.06);
+      border-radius: 16px;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      padding: 16px;
+      min-height: 140px;
+    }
+
+    .panel h3 {
+      margin: 0 0 8px;
+      font-size: 17px;
+      letter-spacing: 0.2px;
+    }
+
+    .panel p {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.4;
+    }
+
+    .cta-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 24px;
+      justify-content: center;
+    }
+
+    .cta {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      padding: 14px 18px;
+      border-radius: 14px;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      cursor: pointer;
+      border: none;
+      transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+    }
+
+    .hero {
+      text-align: center;
+    }
+
+    .cta.primary {
+      background: linear-gradient(120deg, var(--accent), var(--accent-2));
+      color: #0a0d14;
+      box-shadow: 0 10px 30px rgba(255, 127, 80, 0.35);
+    }
+
+    .cta.secondary {
+      background: transparent;
+      color: var(--text);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    .cta:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 16px 40px rgba(0, 0, 0, 0.2);
+    }
+
+    .cta.small {
+      padding: 10px 12px;
+      font-weight: 600;
+      font-size: 14px;
+      border-radius: 10px;
+    }
+
+    .meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 10px;
+    }
+
+    .meta small {
+      color: var(--muted);
+      letter-spacing: 0.4px;
+    }
+
+    .meter {
+      position: relative;
+      background: rgba(255, 255, 255, 0.08);
+      border-radius: 999px;
+      height: 10px;
+      overflow: hidden;
+      margin-top: 8px;
+    }
+
+    .meter span {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(120deg, var(--accent), var(--accent-2));
+      width: var(--value, 60%);
+      border-radius: inherit;
+    }
+
+    .footer-note {
+      margin-top: 18px;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .nav-tabs {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 24px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      overflow-x: auto;
+      padding-bottom: 12px;
+      scrollbar-width: none;
+    }
+
+    .nav-tabs::-webkit-scrollbar {
+      display: none;
+    }
+
+    .nav-tab {
+      padding: 10px 16px;
+      border: none;
+      background: transparent;
+      color: var(--muted);
+      font-weight: 600;
+      font-size: 14px;
+      cursor: pointer;
+      border-radius: 8px 8px 0 0;
+      transition: all 0.2s ease;
+      white-space: nowrap;
+      position: relative;
+    }
+
+    .nav-tab:hover {
+      color: var(--text);
+      background: rgba(255, 255, 255, 0.05);
+    }
+
+    .nav-tab.active {
+      color: var(--accent);
+    }
+
+    .nav-tab.active::after {
+      content: '';
+      position: absolute;
+      bottom: -12px;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: linear-gradient(120deg, var(--accent), var(--accent-2));
+      border-radius: 2px;
+    }
+
+    .content-section {
+      display: none;
+      animation: fadeIn 0.3s ease;
+    }
+
+    .content-section.active {
+      display: block;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    .info-box {
+      background: rgba(255, 255, 255, 0.04);
+      border-left: 3px solid var(--accent);
+      border-radius: 8px;
+      padding: 16px;
+      margin: 12px 0;
+    }
+
+    .info-box strong {
+      color: var(--accent);
+    }
+
+    /* Modal for dictation demo */
+    .modal-backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(10, 13, 20, 0.6);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 4;
+      backdrop-filter: blur(2px);
+    }
+
+    .modal-backdrop.active { display: flex; }
+
+    .modal-card {
+      background: var(--glass);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 16px;
+      width: min(560px, 92vw);
+      padding: 18px;
+      box-shadow: var(--shadow);
+    }
+
+    .modal-card h3 { margin: 0 0 8px; }
+    .modal-card p { margin: 0 0 10px; color: var(--muted); }
+    .modal-card textarea {
+      width: 100%;
+      min-height: 120px;
+      border-radius: 12px;
+      border: 1px solid rgba(255,255,255,0.15);
+      background: rgba(255,255,255,0.04);
+      color: var(--text);
+      padding: 12px;
+      resize: vertical;
+      outline: none;
+    }
+    .modal-actions { display: flex; gap: 10px; justify-content: flex-end; margin-top: 12px; }
+
+    .stars {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      background-image:
+        radial-gradient(1px 1px at 10% 20%, rgba(255,255,255,0.4), transparent),
+        radial-gradient(1px 1px at 80% 30%, rgba(255,255,255,0.4), transparent),
+        radial-gradient(1px 1px at 40% 70%, rgba(255,255,255,0.4), transparent),
+        radial-gradient(1px 1px at 70% 80%, rgba(255,255,255,0.4), transparent);
+      z-index: 0;
+      opacity: 0.5;
+      animation: twinkle 6s ease-in-out infinite alternate;
+    }
+
+    #confetti {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    @keyframes twinkle {
+      0% { opacity: 0.3; transform: scale(1); }
+      50% { opacity: 0.6; transform: scale(1.02); }
+      100% { opacity: 0.3; transform: scale(1); }
+    }
+
+    @media (max-width: 600px) {
+      body { padding: 18px; }
+      .cta-row { flex-direction: column; align-items: stretch; }
+      .cta { width: 100%; justify-content: center; }
+    }
+  </style>
+</head>
+<body>
+  <div class="orb one"></div>
+  <div class="orb two"></div>
+  <div class="stars"></div>
+
+  <div class="shell">
+    <div class="card">
+      <div class="hero">
+        <div class="topline">
+          <span>🌟</span>
+          <span>Willkommen zur KI-Schulung</span>
+        </div>
+
+        <h1>Schön, dass du da bist!</h1>
+        <p class="subhead">
+          Diese Session soll außergewöhnlich, warmherzig und funkelnd sein – genau wie du.
+          Wir tauchen ein in neue Ideen, teilen Aha-Momente und feiern jeden kleinen Fortschritt.
+        </p>
+
+        <div class="pill-row">
+          <div class="pill">Exzellente Stimmung garantiert</div>
+          <div class="pill">Neugier willkommen</div>
+          <div class="pill">Fragen jederzeit</div>
+          <div class="pill">Teamgeist first</div>
+        </div>
+      </div>
+
+      <!-- Übersicht Panel -->
+      <div id="overview" class="content-section active">
+        <div class="grid">
+          <div class="panel">
+            <h3>✨ Warm-up</h3>
+            <p>Ein schneller Check-in: Was hat dich heute schon zum Lächeln gebracht?</p>
+          </div>
+          <div class="panel">
+            <h3>🚀 Ziele</h3>
+            <p>Gemeinsam Kika i verstehen, praxisnah üben und mit einem guten Gefühl rausgehen.</p>
+          </div>
+          <div class="panel">
+            <h3>🤝 Umgang</h3>
+            <p>Wir hören zu, ermutigen einander und feiern Ideen, egal wie wild sie klingen.</p>
+          </div>
+          <div class="panel">
+            <h3>🎁 Extra</h3>
+            <p>Kleine Überraschungen warten – bleib neugierig, es wird bunt und herzlich.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Navigation Tabs -->
+      <div class="nav-tabs" style="margin-top: 32px;">
+        <button class="nav-tab active" data-tab="overview">Übersicht</button>
+        <button class="nav-tab" data-tab="intro">Einführung</button>
+        <button class="nav-tab" data-tab="repository">Repository</button>
+        <button class="nav-tab" data-tab="prompts">KI Prompts</button>
+        <button class="nav-tab" data-tab="models">KI Modelle</button>
+        <button class="nav-tab" data-tab="explorer">Explorer</button>
+        <button class="nav-tab" data-tab="tools">Tools</button>
+        <button class="nav-tab" data-tab="risks">Missbrauch & Risiken</button>
+      </div>
+
+      <!-- Einführung -->
+      <div id="intro" class="content-section">
+        <h2 style="margin-top: 0;">Was KI kann und wie man damit arbeitet</h2>
+        <p style="color: var(--muted); line-height: 1.6;">
+          Künstliche Intelligenz ist ein mächtiges Werkzeug, das Muster erkennt, Texte generiert und Entscheidungen unterstützt. Damit du das Beste daraus holst, brauchst du ein grundlegendes Verständnis für ihre Fähigkeiten und Grenzen.
+        </p>
+        <div class="grid">
+          <div class="panel">
+            <h3>🧠 Was KI macht</h3>
+            <p>Analysiert Daten, erkennt Muster, generiert Inhalte und beantwortet Fragen basierend auf Training.</p>
+          </div>
+          <div class="panel">
+            <h3>⚡ Praktische Anwendung</h3>
+            <p>Klar formulierte Aufgaben, iteratives Arbeiten und kritische Überprüfung der Ergebnisse.</p>
+          </div>
+          <div class="panel">
+            <h3>🎯 Best Practice</h3>
+            <p>Kontextbezogen arbeiten, Antworten validieren und KI als Sparringspartner nutzen – nicht als Wahrheit.</p>
+          </div>
+        </div>
+        <div class="info-box">
+          <strong>Tipp:</strong> KI funktioniert am besten, wenn du klar definierte Aufgaben gibst und bereit bist, die Ergebnisse zu verfeinern.
+        </div>
+      </div>
+
+      <!-- Repository -->
+      <div id="repository" class="content-section">
+        <h2 style="margin-top: 0;">Repository – Wissenssammlung nutzen</h2>
+        <p style="color: var(--muted); line-height: 1.6;">
+          Ein gut gepflegtes Repository ist dein digitales Gedächtnis. Es speichert Prompts, Lösungen und Best Practices – damit du nicht jedes Mal von vorne anfängst.
+        </p>
+        <div class="grid">
+          <div class="panel">
+            <h3>📚 Was gehört rein?</h3>
+            <p>• Bewährte Prompts<br>• Lösungsansätze<br>• Checklisten<br>• Fehlgeschlagene Versuche & Learnings</p>
+          </div>
+          <div class="panel">
+            <h3>🗂️ Struktur</h3>
+            <p><strong>Kategorie:</strong> Nach Anwendungsbereich (Marketing, Code, Design, etc.)<br><strong>Tagging:</strong> Schnelle Suche mit Labels<br><strong>Versionierung:</strong> Besserte Versionen dokumentieren</p>
+          </div>
+          <div class="panel">
+            <h3>💾 Tools & Systeme</h3>
+            <p>• Einfach: Markdown-Dateien in Git<br>• Mittel: Notion oder Wiki<br>• Professionell: Spezialisierte Prompt-Manager</p>
+          </div>
+          <div class="panel">
+            <h3>🔄 Best Practice</h3>
+            <p>• Regelmäßig aktualisieren<br>• Mit Team teilen<br>• Erfolgreiche Prompts dokumentieren<br>• Kontext für jeden Eintrag speichern</p>
+          </div>
+          <div class="panel">
+            <h3>⭐ Gold-Nuggets</h3>
+            <p>Markiere deine Top-3 Prompts, die immer wieder funktionieren. Das ist dein Starting Point.</p>
+          </div>
+          <div class="panel">
+            <h3>🚀 Tempo-Hack</h3>
+            <p>Ein gut gepflegtes Repository spart dir Zeit – du wählst aus bewährten Lösungen statt von null zu starten.</p>
+          </div>
+        </div>
+        <div class="info-box">
+          <strong>Geheimtipp:</strong> Beginne mit 5-10 deiner besten Prompts. Wachse organisch, nicht überambitioniert.
+        </div>
+      </div>
+
+      <!-- KI Prompts -->
+      <div id="prompts" class="content-section">
+        <h2 style="margin-top: 0;">KI Prompts – Die Kunst der Anfrage</h2>
+        <p style="color: var(--muted); line-height: 1.6;">
+          Ein guter Prompt ist wie eine präzise Anleitung. Je klarer du formulierst, desto besser wird dein Ergebnis.
+        </p>
+        <div class="grid">
+          <div class="panel">
+            <h3>🎯 Präzise sein</h3>
+            <p><strong>Gut:</strong> „Schreib einen Marketing-Text für eine Kaffee-App für Berufstätige" <br><strong>Besser:</strong> „Schreib einen 120-Wort-Marketing-Text, der Berufstätige anspricht und Geschwindigkeit + Qualität betont."</p>
+          </div>
+          <div class="panel">
+            <h3>🔄 Kontext geben</h3>
+            <p>Teile dem Modell mit, wer die Zielgruppe ist, was das Ziel ist und welcher Tone angemessen ist.</p>
+          </div>
+          <div class="panel">
+            <h3>🔀 Iterieren</h3>
+            <p>Wenn das erste Ergebnis nicht passt, verfeinere deinen Prompt – das ist Teil des Prozesses.</p>
+          </div>
+          <div class="panel">
+            <h3>💡 Rollen nutzen</h3>
+            <p>„Stell dich vor wie ein erfahrener UX-Designer" kann die Qualität erheblich verbessern.</p>
+          </div>
+        </div>
+        <div class="info-box">
+          <strong>Merksatz:</strong> Ein Prompt ist ein Dialog, kein Befehl. Je besserer der Kontext, desto besser die Antwort.
+        </div>
+      </div>
+
+      <!-- KI Modelle -->
+      <div id="models" class="content-section">
+        <h2 style="margin-top: 0;">KI Modelle – Unterschiede und Eigenschaften</h2>
+        <p style="color: var(--muted); line-height: 1.6;">
+          Verschiedene Modelle haben unterschiedliche Stärken. Das Richtige zu wählen macht einen großen Unterschied.
+        </p>
+        <div class="grid">
+          <div class="panel">
+            <h3>⚡ Schnelle Modelle</h3>
+            <p><strong>Einsatz:</strong> Schnelle Brainstorms, Draft-Generierung, einfache Aufgaben. <strong>Vorteil:</strong> Sofortige Feedback-Schleifen.</p>
+          </div>
+          <div class="panel">
+            <h3>🧬 Große Modelle</h3>
+            <p><strong>Einsatz:</strong> Komplexe Analysen, kreative Aufgaben, spezialisierte Probleme. <strong>Vorteil:</strong> Höhere Genauigkeit und Nuance.</p>
+          </div>
+          <div class="panel">
+            <h3>🎨 Spezialisierte Modelle</h3>
+            <p><strong>Bild:</strong> Visuelle Content-Erstellung. <strong>Audio:</strong> Sprache und Musik. <strong>Code:</strong> Programmierung.</p>
+          </div>
+          <div class="panel">
+            <h3>🔍 Dein KI-Assistent hier</h3>
+            <p><strong>Typ:</strong> Claude – spezialisiert auf Reasoning und nuancierte Aufgaben. <strong>Stärken:</strong> Logisches Denken, kreative Lösungen, längere Analysen.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Explorer -->
+      <div id="explorer" class="content-section">
+        <h2 style="margin-top: 0;">KI Explorer – Selbst experimentieren</h2>
+        <p style="color: var(--muted); line-height: 1.6;">
+          Der beste Weg zu lernen: Ausprobieren. Hier sind Einstiegspunkte zum Experimentieren.
+        </p>
+        <div class="grid">
+          <div class="panel">
+            <h3>🚀 Quick Start</h3>
+            <p>1. Denk an eine Aufgabe, die dir im Alltag schwerfällt<br>2. Formuliere sie als Prompt<br>3. Probiere verschiedene Formulierungen</p>
+          </div>
+          <div class="panel">
+            <h3>🎯 Ideale Kandidaten</h3>
+            <p>• Texte schreiben oder umformulieren<br>• Brainstorming & Ideenfindung<br>• Code-Snippets generieren<br>• Konzepte erklären lassen</p>
+          </div>
+          <div class="panel">
+            <h3>📊 Tracking</h3>
+            <p>Führe Buch über Prompts, die gut funktioniert haben. So wirst du immer besser darin, KI einzusetzen.</p>
+          </div>
+          <div class="panel">
+            <h3>🔗 Ressourcen</h3>
+            <p>Nutze Prompt-Bibliotheken, Communities und dein eigenes Experimentieren als Lernquellen.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tools installieren -->
+      <div id="tools" class="content-section">
+        <h2 style="margin-top: 0;">Tools, die du brauchst</h2>
+        <p style="color: var(--muted); line-height: 1.6;">
+          Mit den richtigen Werkzeugen geht alles schneller. Installiere diese Tools und du bist startklar.
+        </p>
+        <div class="grid">
+          <div class="panel">
+            <h3>🛠️ VS Code</h3>
+            <p>Leichter, schneller Editor mit riesigem Ökosystem.<br><strong>Install:</strong> code.visualstudio.com → Download & installieren<br><strong>Empfehlung:</strong> Aktiviere Auto-Update.</p>
+          </div>
+          <div class="panel">
+            <h3>🤝 GitHub Copilot</h3>
+            <p>KI-Pair-Programmer für Code & Texte.<br><strong>Install:</strong> In VS Code den Marketplace öffnen → "GitHub Copilot" installieren.<br><strong>Hinweis:</strong> Anmeldung mit GitHub-Account, ggf. Trial aktivieren.</p>
+          </div>
+          <div class="panel">
+            <h3>💬 CODEX / ChatGPT</h3>
+            <p>Chat-basierte KI für Ideen, Erklärungen, Prompts.<br><strong>Web:</strong> chat.openai.com<br><strong>Tipp:</strong> Nutze den Browser oder die offizielle Desktop-/Mobile-App für schnelle Abfragen.</p>
+          </div>
+          <div class="panel">
+            <h3>🌿 Git einrichten</h3>
+            <p><strong>Download:</strong> git-scm.com → installieren (inkl. Git Bash).<br><strong>User setzen:</strong> git config --global user.name "Dein Name"<br>git config --global user.email "you@example.com"<br><strong>SSH-Key:</strong> ssh-keygen -t ed25519 -C "you@example.com" → Public Key bei GitHub/GitLab hinterlegen.</p>
+          </div>
+          <div class="panel">
+            <h3>🎙️ Spracheingabe (Windows + H)</h3>
+            <p><strong>Kurzbefehl:</strong> Windows-Taste + H öffnet die Diktierfunktion.<br>
+            <strong>Warum gut:</strong> Ideen schneller festhalten, Hände frei, barrierearm, weniger Tippfehler bei langen Texten.<br>
+            <strong>Tipps:</strong> Headset nutzen, deutlich sprechen, Satzzeichen wie „Punkt“, „Komma“ mitsprechen.</p>
+            <button class="cta secondary small" id="winhTestBtn">Windows + H jetzt testen</button>
+          </div>
+          <div class="panel">
+            <h3>📘 Cookbook: KI-Modelle</h3>
+            <p>Nützliche Rezepte, Patterns und Beispiele:<br>
+              • <a href="https://cookbook.openai.com/" target="_blank" rel="noopener">OpenAI Cookbook</a><br>
+              • <a href="https://github.com/openai/openai-cookbook" target="_blank" rel="noopener">OpenAI Cookbook (GitHub)</a><br>
+              • <a href="https://huggingface.co/tasks" target="_blank" rel="noopener">Hugging Face Tasks & Beispiele</a>
+            </p>
+          </div>
+        </div>
+        <div class="info-box">
+          <strong>Schnellstart:</strong> VS Code installieren → Copilot Extension hinzufügen → Mit ChatGPT/CODEX testen. Fertig.
+        </div>
+      </div>
+
+      <!-- Dictation Demo Modal -->
+      <div class="modal-backdrop" id="dictationModal" aria-hidden="true" role="dialog" aria-label="Diktat testen">
+        <div class="modal-card">
+          <h3>Windows + H testen</h3>
+          <p>1) Klicke ins Feld unten. 2) Drücke Windows + H. 3) Sprich deinen Text – er erscheint hier.</p>
+          <textarea id="dictationTarget" placeholder="Hier hinein diktieren …"></textarea>
+          <div class="modal-actions">
+            <button class="cta secondary small" id="closeDictationModal">Schließen</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Missbrauch & Risiken -->
+      <div id="risks" class="content-section">
+        <h2 style="margin-top: 0;">Missbrauch & Ethik – Verantwortungsvoll nutzen</h2>
+        <p style="color: var(--muted); line-height: 1.6;">
+          KI ist mächtig. Das bedeutet auch: Wir müssen sie verantwortungsvoll einsetzen. Hier sind die wichtigsten Punkte.
+        </p>
+        <div class="grid">
+          <div class="panel">
+            <h3>⚠️ Keine Desinformation</h3>
+            <p>Nutze KI nicht, um falsche Informationen zu verbreiten oder Menschen zu täuschen. Validiere Ergebnisse immer.</p>
+          </div>
+          <div class="panel">
+            <h3>🔐 Datenschutz</h3>
+            <p>Teile keine sensiblen Daten, Passwörter oder persönlichen Informationen mit KI-Tools. Bedenke Datenschutzrichtlinien.</p>
+          </div>
+          <div class="panel">
+            <h3>👥 Bias & Fairness</h3>
+            <p>KI-Modelle haben Biases. Überprüfe Output auf Diskriminierung und gleiche Chancen – besonders bei wichtigen Entscheidungen.</p>
+          </div>
+          <div class="panel">
+            <h3>🎨 Urheberrecht</h3>
+            <p>KI-generierte Inhalte können bestehende Werke widerspiegeln. Überprüfe rechtliche Implikationen vor der Nutzung.</p>
+          </div>
+          <div class="panel">
+            <h3>✍️ Transparenz</h3>
+            <p>Offenbare, wenn KI-Tools verwendet wurden – besonders in der Kommunikation mit anderen oder in öffentlichen Inhalten.</p>
+          </div>
+          <div class="panel">
+            <h3>🧠 Menschliche Überprüfung</h3>
+            <p>KI ersetzt kein kritisches Denken. Der Mensch trägt die Verantwortung für die Entscheidungen – immer.</p>
+          </div>
+        </div>
+        <div class="info-box">
+          <strong>Kernbotschaft:</strong> KI ist ein Werkzeug für Effizienz und Kreativität – nutze es ethisch und verantwortungsvoll.
+        </div>
+      </div>
+
+      <div class="cta-row">
+        <button class="cta primary" id="startButton">Los geht’s ✨</button>
+        <button class="cta secondary" id="toggleButton">Glitzer stoppen</button>
+      </div>
+
+      <div class="meta">
+        <small>Ort: Kreativraum</small>
+        <small>Zeit: Jetzt – nimm dir deinen Moment</small>
+        <small>Dresscode: Neugier & gute Laune</small>
+      </div>
+
+      <p class="footer-note">
+        Wenn du etwas brauchst oder eine Idee einbringen willst, sag Bescheid – diese Schulung lebt von dir.
+      </p>
+    </div>
+  </div>
+
+  <canvas id="confetti"></canvas>
+
+  <script>
+    // Tab Navigation
+    const navTabs = document.querySelectorAll('.nav-tab');
+    const contentSections = document.querySelectorAll('.content-section');
+
+    navTabs.forEach(tab => {
+      tab.addEventListener('click', () => {
+        const tabName = tab.dataset.tab;
+        
+        // Remove active class from all tabs and sections
+        navTabs.forEach(t => t.classList.remove('active'));
+        contentSections.forEach(s => s.classList.remove('active'));
+        
+        // Add active class to clicked tab and corresponding section
+        tab.classList.add('active');
+        document.getElementById(tabName).classList.add('active');
+      });
+    });
+
+    const canvas = document.getElementById('confetti');
+    const ctx = canvas.getContext('2d');
+    let particles = [];
+    let animationId = null;
+    let isRunning = true;
+
+    const resize = () => {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    };
+
+    window.addEventListener('resize', resize);
+    resize();
+
+    const colors = ['#f7b500', '#ff6f61', '#7cdfff', '#b4f36b'];
+
+    function createParticles(count = 60) {
+      for (let i = 0; i < count; i++) {
+        particles.push({
+          x: Math.random() * canvas.width,
+          y: -20,
+          size: Math.random() * 6 + 3,
+          speedY: Math.random() * 2 + 2,
+          speedX: Math.random() * 2 - 1,
+          color: colors[Math.floor(Math.random() * colors.length)],
+          rotation: Math.random() * 360,
+          rotationSpeed: Math.random() * 6 - 3
+        });
+      }
+    }
+
+    function update() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      particles.forEach((p) => {
+        p.x += p.speedX;
+        p.y += p.speedY;
+        p.rotation += p.rotationSpeed;
+        if (p.y > canvas.height + 20) p.y = -10;
+        if (p.x > canvas.width) p.x = 0;
+        if (p.x < 0) p.x = canvas.width;
+        drawParticle(p);
+      });
+      particles = particles.slice(-400);
+      if (isRunning) {
+        animationId = requestAnimationFrame(update);
+      }
+    }
+
+    function drawParticle(p) {
+      ctx.save();
+      ctx.translate(p.x, p.y);
+      ctx.rotate((p.rotation * Math.PI) / 180);
+      ctx.fillStyle = p.color;
+      ctx.fillRect(-p.size / 2, -p.size / 2, p.size, p.size * 0.6);
+      ctx.restore();
+    }
+
+    function stopAnimation() {
+      isRunning = false;
+      if (animationId) {
+        cancelAnimationFrame(animationId);
+      }
+      particles = [];
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+    }
+
+    function startAnimation() {
+      if (!isRunning) {
+        isRunning = true;
+        createParticles(80);
+        update();
+      }
+    }
+
+    document.getElementById('startButton').addEventListener('click', () => {
+      createParticles(120);
+      if (!isRunning) {
+        startAnimation();
+      }
+    });
+
+    const toggleButton = document.getElementById('toggleButton');
+    toggleButton.addEventListener('click', () => {
+      if (isRunning) {
+        stopAnimation();
+        toggleButton.textContent = 'Glitzer starten ✨';
+      } else {
+        startAnimation();
+        toggleButton.textContent = 'Glitzer stoppen';
+      }
+    });
+
+    createParticles(80);
+    update();
+
+    // Dictation modal logic
+    const dictationModal = document.getElementById('dictationModal');
+    const winhTestBtn = document.getElementById('winhTestBtn');
+    const closeDictationModal = document.getElementById('closeDictationModal');
+    const dictationTarget = document.getElementById('dictationTarget');
+
+    function openDictationModal() {
+      dictationModal.classList.add('active');
+      dictationModal.setAttribute('aria-hidden', 'false');
+      // Delay focus slightly to ensure element is visible
+      setTimeout(() => dictationTarget.focus(), 50);
+    }
+    function closeDictation() {
+      dictationModal.classList.remove('active');
+      dictationModal.setAttribute('aria-hidden', 'true');
+    }
+    winhTestBtn?.addEventListener('click', openDictationModal);
+    closeDictationModal?.addEventListener('click', closeDictation);
+    dictationModal?.addEventListener('click', (e) => { if (e.target === dictationModal) closeDictation(); });
+    window.addEventListener('keydown', (e) => { if (e.key === 'Escape' && dictationModal.classList.contains('active')) closeDictation(); });
+  </script>
+</body>
+</html>
