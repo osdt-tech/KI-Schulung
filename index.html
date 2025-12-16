@@ -378,6 +378,35 @@
       color: var(--accent);
     }
 
+    /* Accessibility helpers */
+    .skip-link {
+      position: absolute;
+      left: -999px;
+      top: 8px;
+      background: #0a0d14;
+      color: var(--text);
+      padding: 10px 14px;
+      border-radius: 10px;
+      border: 2px solid var(--accent);
+      z-index: 5;
+    }
+
+    .skip-link:focus { left: 12px; }
+
+    .nav-tab:focus-visible,
+    .cta:focus-visible,
+    .link-list a:focus-visible,
+    button:focus-visible {
+      outline: 2px solid var(--accent);
+      outline-offset: 2px;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .orb,
+      .stars { animation: none !important; }
+      * { scroll-behavior: auto; }
+    }
+
     /* Modal for dictation demo */
     .modal-backdrop {
       position: fixed;
@@ -451,11 +480,12 @@
   </style>
 </head>
 <body>
+  <a class="skip-link" href="#main">Zum Inhalt springen</a>
   <div class="orb one"></div>
   <div class="orb two"></div>
   <div class="stars"></div>
 
-  <div class="shell">
+  <div class="shell" role="main" id="main">
     <div class="card">
       <div class="hero">
         <div class="topline">
@@ -478,7 +508,7 @@
       </div>
 
       <!-- Übersicht Panel -->
-      <div id="overview" class="content-section active">
+      <div id="overview" class="content-section active" role="tabpanel" aria-labelledby="tab-overview" tabindex="0">
         <div class="grid">
           <div class="panel">
             <h3>✨ Warm-up</h3>
@@ -500,19 +530,19 @@
       </div>
 
       <!-- Navigation Tabs -->
-      <div class="nav-tabs" style="margin-top: 32px;">
-        <button class="nav-tab active" data-tab="overview">Übersicht</button>
-        <button class="nav-tab" data-tab="intro">Einführung</button>
-        <button class="nav-tab" data-tab="repository">Repository</button>
-        <button class="nav-tab" data-tab="prompts">KI Prompts</button>
-        <button class="nav-tab" data-tab="models">KI Modelle</button>
-        <button class="nav-tab" data-tab="explorer">Explorer</button>
-        <button class="nav-tab" data-tab="tools">Tools</button>
-        <button class="nav-tab" data-tab="risks">Missbrauch & Risiken</button>
+      <div class="nav-tabs" style="margin-top: 32px;" role="tablist" aria-label="Abschnitte">
+        <button id="tab-overview" class="nav-tab active" role="tab" aria-selected="true" aria-controls="overview" data-tab="overview">Übersicht</button>
+        <button id="tab-intro" class="nav-tab" role="tab" aria-selected="false" aria-controls="intro" data-tab="intro" tabindex="-1">Einführung</button>
+        <button id="tab-repository" class="nav-tab" role="tab" aria-selected="false" aria-controls="repository" data-tab="repository" tabindex="-1">Repository</button>
+        <button id="tab-prompts" class="nav-tab" role="tab" aria-selected="false" aria-controls="prompts" data-tab="prompts" tabindex="-1">KI Prompts</button>
+        <button id="tab-models" class="nav-tab" role="tab" aria-selected="false" aria-controls="models" data-tab="models" tabindex="-1">KI Modelle</button>
+        <button id="tab-explorer" class="nav-tab" role="tab" aria-selected="false" aria-controls="explorer" data-tab="explorer" tabindex="-1">Explorer</button>
+        <button id="tab-tools" class="nav-tab" role="tab" aria-selected="false" aria-controls="tools" data-tab="tools" tabindex="-1">Tools</button>
+        <button id="tab-risks" class="nav-tab" role="tab" aria-selected="false" aria-controls="risks" data-tab="risks" tabindex="-1">Missbrauch & Risiken</button>
       </div>
 
       <!-- Einführung -->
-      <div id="intro" class="content-section">
+      <div id="intro" class="content-section" role="tabpanel" aria-labelledby="tab-intro" tabindex="0" hidden>
         <h2 style="margin-top: 0;">Was KI kann und wie man damit arbeitet</h2>
         <p style="color: var(--muted); line-height: 1.6;">
           Künstliche Intelligenz ist ein mächtiges Werkzeug, das Muster erkennt, Texte generiert und Entscheidungen unterstützt. Damit du das Beste daraus holst, brauchst du ein grundlegendes Verständnis für ihre Fähigkeiten und Grenzen.
@@ -537,7 +567,7 @@
       </div>
 
       <!-- Repository -->
-      <div id="repository" class="content-section">
+      <div id="repository" class="content-section" role="tabpanel" aria-labelledby="tab-repository" tabindex="0" hidden>
         <h2 style="margin-top: 0;">Repository – Wissenssammlung nutzen</h2>
         <p style="color: var(--muted); line-height: 1.6;">
           Ein gut gepflegtes Repository ist dein digitales Gedächtnis. Es speichert Prompts, Lösungen und Best Practices – damit du nicht jedes Mal von vorne anfängst.
@@ -574,7 +604,7 @@
       </div>
 
       <!-- KI Prompts -->
-      <div id="prompts" class="content-section">
+      <div id="prompts" class="content-section" role="tabpanel" aria-labelledby="tab-prompts" tabindex="0" hidden>
         <h2 style="margin-top: 0;">KI Prompts – Die Kunst der Anfrage</h2>
         <p style="color: var(--muted); line-height: 1.6;">
           Ein guter Prompt ist wie eine präzise Anleitung. Je klarer du formulierst, desto besser wird dein Ergebnis.
@@ -603,7 +633,7 @@
       </div>
 
       <!-- KI Modelle -->
-      <div id="models" class="content-section">
+      <div id="models" class="content-section" role="tabpanel" aria-labelledby="tab-models" tabindex="0" hidden>
         <h2 style="margin-top: 0;">KI Modelle – Unterschiede und Eigenschaften</h2>
         <p style="color: var(--muted); line-height: 1.6;">
           Verschiedene Modelle haben unterschiedliche Stärken. Das Richtige zu wählen macht einen großen Unterschied.
@@ -647,7 +677,7 @@
       </div>
 
       <!-- Explorer -->
-      <div id="explorer" class="content-section">
+      <div id="explorer" class="content-section" role="tabpanel" aria-labelledby="tab-explorer" tabindex="0" hidden>
         <h2 style="margin-top: 0;">KI Explorer – Selbst experimentieren</h2>
         <p style="color: var(--muted); line-height: 1.6;">
           Der beste Weg zu lernen: Ausprobieren. Hier sind Einstiegspunkte zum Experimentieren.
@@ -673,7 +703,7 @@
       </div>
 
       <!-- Tools installieren -->
-      <div id="tools" class="content-section">
+      <div id="tools" class="content-section" role="tabpanel" aria-labelledby="tab-tools" tabindex="0" hidden>
         <h2 style="margin-top: 0;">Tools, die du brauchst</h2>
         <p style="color: var(--muted); line-height: 1.6;">
           Mit den richtigen Werkzeugen geht alles schneller. Installiere diese Tools und du bist startklar.
@@ -721,7 +751,7 @@
       </div>
 
       <!-- Missbrauch & Risiken -->
-      <div id="risks" class="content-section">
+      <div id="risks" class="content-section" role="tabpanel" aria-labelledby="tab-risks" tabindex="0" hidden>
         <h2 style="margin-top: 0;">Missbrauch & Ethik – Verantwortungsvoll nutzen</h2>
         <p style="color: var(--muted); line-height: 1.6;">
           KI ist mächtig. Das bedeutet auch: Wir müssen sie verantwortungsvoll einsetzen. Hier sind die wichtigsten Punkte.
@@ -777,18 +807,21 @@
   <canvas id="confetti"></canvas>
 
   <script>
-    // Tab Navigation
+    // Tab Navigation with ARIA
     const navTabs = document.querySelectorAll('.nav-tab');
     const contentSections = document.querySelectorAll('.content-section');
 
     function activateTab(tabName) {
-      // Reset active states for tabs and content
       navTabs.forEach(t => {
         const isMatch = t.dataset.tab === tabName;
         t.classList.toggle('active', isMatch);
+        t.setAttribute('aria-selected', String(isMatch));
+        t.tabIndex = isMatch ? 0 : -1;
       });
       contentSections.forEach(section => {
-        section.classList.toggle('active', section.id === tabName);
+        const isActive = section.id === tabName;
+        section.classList.toggle('active', isActive);
+        section.hidden = !isActive;
       });
     }
 
@@ -796,11 +829,36 @@
       tab.addEventListener('click', () => activateTab(tab.dataset.tab));
     });
 
+    // Keyboard navigation among tabs
+    const tablist = document.querySelector('.nav-tabs[role="tablist"]');
+    tablist?.addEventListener('keydown', (e) => {
+      const tabs = Array.from(navTabs);
+      const currentIndex = tabs.indexOf(document.activeElement);
+      if (e.key === 'ArrowRight' || e.key === 'ArrowLeft') {
+        const dir = e.key === 'ArrowRight' ? 1 : -1;
+        const next = (currentIndex + dir + tabs.length) % tabs.length;
+        tabs[next].focus();
+        e.preventDefault();
+      } else if (e.key === 'Home') {
+        tabs[0].focus();
+        e.preventDefault();
+      } else if (e.key === 'End') {
+        tabs[tabs.length - 1].focus();
+        e.preventDefault();
+      } else if (e.key === 'Enter' || e.key === ' ') {
+        if (document.activeElement?.classList.contains('nav-tab')) {
+          document.activeElement.click();
+          e.preventDefault();
+        }
+      }
+    });
+
     const canvas = document.getElementById('confetti');
     const ctx = canvas.getContext('2d');
     let particles = [];
     let animationId = null;
-    let isRunning = true;
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    let isRunning = !prefersReducedMotion;
 
     const resize = () => {
       canvas.width = window.innerWidth;
@@ -876,6 +934,7 @@
         startAnimation();
       }
       activateTab('intro'); // Switch to Einführung when starting
+      document.getElementById('intro')?.focus();
     });
 
     const toggleButton = document.getElementById('toggleButton');
@@ -889,8 +948,10 @@
       }
     });
 
-    createParticles(80);
-    update();
+    if (isRunning) {
+      createParticles(80);
+      update();
+    }
 
     // Dictation modal logic
     const dictationModal = document.getElementById('dictationModal');
