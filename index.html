@@ -781,18 +781,19 @@
     const navTabs = document.querySelectorAll('.nav-tab');
     const contentSections = document.querySelectorAll('.content-section');
 
-    navTabs.forEach(tab => {
-      tab.addEventListener('click', () => {
-        const tabName = tab.dataset.tab;
-        
-        // Remove active class from all tabs and sections
-        navTabs.forEach(t => t.classList.remove('active'));
-        contentSections.forEach(s => s.classList.remove('active'));
-        
-        // Add active class to clicked tab and corresponding section
-        tab.classList.add('active');
-        document.getElementById(tabName).classList.add('active');
+    function activateTab(tabName) {
+      // Reset active states for tabs and content
+      navTabs.forEach(t => {
+        const isMatch = t.dataset.tab === tabName;
+        t.classList.toggle('active', isMatch);
       });
+      contentSections.forEach(section => {
+        section.classList.toggle('active', section.id === tabName);
+      });
+    }
+
+    navTabs.forEach(tab => {
+      tab.addEventListener('click', () => activateTab(tab.dataset.tab));
     });
 
     const canvas = document.getElementById('confetti');
@@ -874,6 +875,7 @@
       if (!isRunning) {
         startAnimation();
       }
+      activateTab('intro'); // Switch to Einführung when starting
     });
 
     const toggleButton = document.getElementById('toggleButton');
