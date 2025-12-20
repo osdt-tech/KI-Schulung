@@ -2,6 +2,8 @@
 
 Eine interaktive, warmherzige Einführung in Künstliche Intelligenz mit praktischen Tipps, Best Practices und Ressourcen.
 
+https://osdt-tech.github.io/KI-Schulung/
+
 ## 🎯 Worum geht es?
 
 Diese Schulung vermittelt:
